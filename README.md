@@ -1,7 +1,7 @@
 # LLaVA-PruMerge: Adaptive Token Reduction for Efficient Large Multimodal Models
 # Accpeted to ICCV 2025, but arxived on March 2024
 
-[Yuzhang Shang](https://42shawn.github.io/)\*, [Mu Cai](https://pages.cs.wisc.edu/~mucai/)\*, Bingxin Xu, [Yong Jae Lee](https://pages.cs.wisc.edu/~yongjaelee/)^, [Yan Yan](https://tomyan555.github.io/)^
+[Yuzhang Shang](https://42shawn.github.io/)\*, [Mu Cai](https://pages.cs.wisc.edu/~mucai/)\*, [Bingxin Xu](https://www.linkedin.com/in/bingxin-xu/)\*, [Yong Jae Lee](https://pages.cs.wisc.edu/~yongjaelee/)^, [Yan Yan](https://tomyan555.github.io/)^
 
 \*Equal Contribution, ^Equal Advising
 
