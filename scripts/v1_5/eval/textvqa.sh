@@ -2,7 +2,7 @@
 
 python -m llava.eval.model_vqa_loader \
     --model-base lmsys/vicuna-7b-v1.5 \
-    --model-path /data/shangyuzhang/LLaVA/checkpoints/llava-v1.5-7b-lora-20240312-to \
+    --model-path checkpoints/llava-v1.5-7b-lora-prunemerge \
     --question-file ./playground/data/eval/textvqa/llava_textvqa_val_v051_ocr.jsonl \
     --image-folder ./playground/data/eval/textvqa/train_images \
     --answers-file ./playground/data/eval/textvqa/answers/llava-v1.5-7b.jsonl \
