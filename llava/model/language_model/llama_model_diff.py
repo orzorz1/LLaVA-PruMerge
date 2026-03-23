@@ -186,11 +186,12 @@ class LlamaModelFastVDiff(LlamaModel):
         SYS_LENGTH = self.fast_v_sys_length
         IMAGE_TOKEN_LENGTH = self.fast_v_image_token_length
         ATTENTION_RANK = self.fast_v_attention_rank
+        # 同 fastv：AGG_LAYER = fastv_k，表示「从第几层开始做删减图像 token」
         AGG_LAYER = self.fast_v_agg_layer
         device = input_ids.device if input_ids is not None else inputs_embeds.device
 
         layer_outputs = None
-        # 剪枝前清空；剪枝后设为 keep_indexs.max()+1，供 rotary 包装器抬高 seq_len
+        # 每条序列开始前清掉；若剪枝后需要扩大 RoPE 表长度，会在下面写入最大位置
         self._fastv_rope_index_ub = None
 
         for idx, decoder_layer in enumerate(self.layers):
@@ -215,6 +216,7 @@ class LlamaModelFastVDiff(LlamaModel):
                     None,
                 )
             else:
+                # 和 FastV 一样：先在前一层把注意力算出来存下来，再在 AGG_LAYER 这一层开头删图像 token
                 need_attn_for_prune = idx == AGG_LAYER - 1
                 layer_out_att = True if need_attn_for_prune else output_attentions
 
@@ -224,16 +226,25 @@ class LlamaModelFastVDiff(LlamaModel):
                     if layer_outputs is None:
                         raise RuntimeError("FastV: expected previous layer outputs before agg layer")
                     last_layer_attention = layer_outputs[1]
+
+                    # 多头平均成一张「谁在看谁」的方阵；一般只跑一条样本，取第 0 个
                     last_layer_attention_avg = torch.mean(last_layer_attention, dim=1)[0]
+
+                    # 图像占多少个 token：默认 576；PruMerge 会少很多，用 encode_images 里记好的数
                     n_img_cfg = IMAGE_TOKEN_LENGTH
                     n_img_rt = getattr(self, "_fastv_runtime_n_image", None)
                     if n_img_rt is not None:
                         n_img = int(n_img_rt)
                     else:
                         n_img = int(n_img_cfg)
+
+                    # 别让图像段超出当前句子长度；至少留 1 个图像 token
                     max_img_span = max(0, seq_length_with_past - SYS_LENGTH)
                     n_img = max(1, min(n_img, max_img_span))
                     img_end = SYS_LENGTH + n_img
+
+                    # 在图像块里挑要保留哪些位置：开双差分就用 ATE 分数；关掉则用和 FastV 一样的「最后 token→图像」注意力
+                    # question_row_index=-1 表示用「最后那个 token」当问题那一行
                     top_attention_rank_index = fastv_image_topk_indices(
                         last_layer_attention_avg,
                         SYS_LENGTH,
@@ -243,6 +254,8 @@ class LlamaModelFastVDiff(LlamaModel):
                         lambda_tt=float(getattr(self, "fastv_diff_lambda_tt", 1.0)),
                         question_row_index=-1,
                     )
+
+                    # 前面系统词 + 挑中的图像 + 图像后面的话，排序后按顺序裁剪
                     keep_indexs = torch.cat(
                         (
                             torch.arange(SYS_LENGTH, device=device),
@@ -252,14 +265,17 @@ class LlamaModelFastVDiff(LlamaModel):
                     )
                     keep_indexs = keep_indexs.sort().values
                     new_seq_length = keep_indexs.shape[0]
+
+                    # 只保留这些位置上的向量
                     hidden_states = hidden_states[:, keep_indexs, :]
+
+                    # 裁剪后位置编号：relative 从 0 重数；absolute 还用原句子里的位置号（RoPE 要够长）
                     pos_mode = getattr(self, "fast_v_rope_positions_after_prune", "relative")
                     if pos_mode == "absolute":
-                        # 与 FastV 仓库一致：position_ids=keep_indexs（原序列下标），依赖 patch_llama_rotary_emb_for_fastv + _fastv_rope_index_ub
                         position_ids = keep_indexs.unsqueeze(0).expand(batch_size, -1)
                         self._fastv_rope_index_ub = int(keep_indexs.max().item()) + 1
                     else:
-                        # 默认：剪枝后按新序列重编号，避免 cos[position_ids] 越界（generate 多步 + 长序列时更稳）
+                        # 新序列从 0 开始编号
                         position_ids = (
                             torch.arange(new_seq_length, device=device, dtype=torch.long)
                             .unsqueeze(0)

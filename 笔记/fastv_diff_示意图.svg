@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 520" width="920" height="520">
+  <rect x="0" y="0" width="920" height="520" fill="#ffffff"/>
+  <defs>
+    <linearGradient id="matGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e8f4fc"/>
+      <stop offset="100%" style="stop-color:#d4e8f7"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
+    </marker>
+    <style type="text/css"><![CDATA[
+      .title { font-family: "PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans CJK SC","Source Han Sans SC",sans-serif;
+               font-size:18px;font-weight:bold;fill:#1a1a1a; }
+      .label { font-family: "PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans CJK SC",sans-serif;
+               font-size:13px;fill:#333; }
+      .small { font-family: "PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans CJK SC",sans-serif;
+               font-size:11px;fill:#555; }
+      .mono  { font-family: Menlo,Consolas,"Noto Sans Mono CJK SC",monospace;font-size:12px;fill:#0d47a1; }
+      .box { stroke:#1976d2;stroke-width:1.5;fill:url(#matGrad); }
+      .imgBlock { stroke:#2e7d32;stroke-width:2;fill:#e8f5e9; }
+      .sysBlock { stroke:#6a1b9a;stroke-width:1.5;fill:#f3e5f5; }
+      .qRow { stroke:#c62828;stroke-width:2;fill:none; }
+    ]]></style>
+  </defs>
+  <text x="460" y="32" text-anchor="middle" class="title">双差分（diff / ATE）视觉 token 打分示意图</text>
+  <text x="460" y="52" text-anchor="middle" class="small">代码：fastv_diff.py → fastv_diff_image_scores / fastv_image_topk_indices</text>
+  <rect x="40" y="68" width="14" height="14" class="sysBlock"/>
+  <text x="60" y="80" class="label">系统/文本前缀 token（长度 sys_len）</text>
+  <rect x="340" y="68" width="14" height="14" class="imgBlock"/>
+  <text x="360" y="80" class="label">图像 token 段（共 n_img 个）</text>
+  <text x="40" y="118" class="label">注意力矩阵（多头平均后） attn_avg[i,j]</text>
+  <text x="40" y="136" class="small">行 i：token i 为 query；列 j：对 token j 的注意力</text>
+  <g transform="translate(40, 150)">
+    <rect x="0" y="0" width="280" height="200" class="box" rx="4"/>
+    <text x="140" y="-8" text-anchor="middle" class="mono">shape ≈ [seq_len, seq_len]</text>
+    <rect x="0" y="0" width="70" height="200" class="sysBlock" opacity="0.85"/>
+    <text x="35" y="105" text-anchor="middle" class="small" transform="rotate(-90 35 105)">前缀列</text>
+    <rect x="70" y="0" width="210" height="200" class="imgBlock" opacity="0.9"/>
+    <text x="175" y="-8" text-anchor="middle" class="label">图像列 img_start … img_end</text>
+    <line x1="0" y1="175" x2="280" y2="175" class="qRow"/>
+    <text x="285" y="180" class="label" fill="#c62828">question 行 qi（通常为最后一枚 token）</text>
+    <rect x="70" y="175" width="210" height="25" fill="none" stroke="#c62828" stroke-width="2" stroke-dasharray="4 2"/>
+    <text x="175" y="192" text-anchor="middle" class="mono" font-size="11">q_to_img = attn[qi, img_start:img_end]</text>
+    <rect x="70" y="0" width="210" height="175" fill="none" stroke="#2e7d32" stroke-width="2"/>
+    <text x="175" y="95" text-anchor="middle" class="small" fill="#2e7d32">m = 图像×图像子矩阵</text>
+  </g>
+  <line x1="330" y1="280" x2="400" y2="280" stroke="#333" marker-end="url(#arrow)"/>
+  <line x1="330" y1="200" x2="400" y2="240" stroke="#333" marker-end="url(#arrow)"/>
+  <g transform="translate(410, 200)">
+    <rect x="0" y="0" width="480" height="280" fill="#fafafa" stroke="#bbb" rx="6"/>
+    <text x="240" y="28" text-anchor="middle" class="label">双差分得分（每个图像 token 一个标量）</text>
+    <text x="20" y="58" class="mono">peer = mean(m, dim=0)</text>
+    <text x="20" y="78" class="small">对图像内部按列求平均：每个图像 token j 的同伴聚合强度</text>
+    <text x="20" y="108" class="mono">tau_q  = ATE_diff_1d(q_to_img)</text>
+    <text x="20" y="128" class="small">对「问题→图像」一维向量做差分，突出相对更显著的图像 token</text>
+    <text x="20" y="158" class="mono">tau_tt = ATE_diff_1d(peer)</text>
+    <text x="20" y="178" class="small">对「图像同伴」一维向量做差分，刻画图像内部相对竞争</text>
+    <text x="20" y="212" class="mono">scores = tau_q + lambda_tt * tau_tt</text>
+    <text x="20" y="232" class="small">lambda_tt = fastv_diff_lambda_tt（CLI：--fastv-diff-lambda-tt）</text>
+    <rect x="20" y="248" width="440" height="22" fill="#fff3e0" stroke="#ff9800" rx="3"/>
+    <text x="240" y="264" text-anchor="middle" class="mono">topk → 保留得分最高的 k 个图像 token 的全局索引</text>
+  </g>
+  <text x="460" y="505" text-anchor="middle" class="small">若 use_diff=False：scores 直接取 attn_avg[qi, img_start:img_end]，与经典 FastV 一致。</text>
+</svg>
