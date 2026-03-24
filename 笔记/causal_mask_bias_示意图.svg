@@ -1,0 +1,266 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="750" viewBox="0 0 900 750">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<style>
+  text { font-family: "PingFang SC","Noto Sans SC","Microsoft YaHei",sans-serif; }
+  .title { font-size: 18px; font-weight: bold; fill: #222; }
+  .subtitle { font-size: 13px; fill: #555; }
+  .label { font-size: 11px; fill: #333; text-anchor: middle; }
+  .label-side { font-size: 11px; fill: #333; text-anchor: end; }
+  .val { font-size: 10px; fill: #333; text-anchor: middle; }
+  .axis-label { font-size: 12px; fill: #444; }
+  .legend { font-size: 11px; fill: #333; }
+  .zero-cell { fill: #f5f5f5; stroke: #ddd; stroke-width: 0.5; }
+  .causal-line { stroke: #e74c3c; stroke-width: 2; stroke-dasharray: 4,3; fill: none; }
+</style>
+<text x="450" y="30" text-anchor="middle" class="title">因果掩码(Causal Mask)对列方向聚合的位置偏差</text>
+<text x="450" y="50" text-anchor="middle" class="subtitle">序列: [s₀ s₁ | i₀ i₁ i₂ i₃ i₄ i₅ | q₀ q₁ q₂]   (sys=2, img=6, question=3)</text>
+<text x="289.0" y="60" text-anchor="middle" class="axis-label">Key j  →</text>
+<text x="45" y="289.0" text-anchor="middle" class="axis-label" transform="rotate(-90, 45, 289.0)">Query i  →</text>
+<text x="99.0" y="76" class="label">s₀</text>
+<text x="137.0" y="76" class="label">s₁</text>
+<text x="175.0" y="76" class="label">i₀</text>
+<text x="213.0" y="76" class="label">i₁</text>
+<text x="251.0" y="76" class="label">i₂</text>
+<text x="289.0" y="76" class="label">i₃</text>
+<text x="327.0" y="76" class="label">i₄</text>
+<text x="365.0" y="76" class="label">i₅</text>
+<text x="403.0" y="76" class="label">q₀</text>
+<text x="441.0" y="76" class="label">q₁</text>
+<text x="479.0" y="76" class="label">q₂</text>
+<text x="75" y="103.0" class="label-side">s₀</text>
+<rect x="80" y="80" width="38" height="38" fill="rgb(40,80,215)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="118" y="80" width="38" height="38" class="zero-cell"/>
+<rect x="156" y="80" width="38" height="38" class="zero-cell"/>
+<rect x="194" y="80" width="38" height="38" class="zero-cell"/>
+<rect x="232" y="80" width="38" height="38" class="zero-cell"/>
+<rect x="270" y="80" width="38" height="38" class="zero-cell"/>
+<rect x="308" y="80" width="38" height="38" class="zero-cell"/>
+<rect x="346" y="80" width="38" height="38" class="zero-cell"/>
+<rect x="384" y="80" width="38" height="38" class="zero-cell"/>
+<rect x="422" y="80" width="38" height="38" class="zero-cell"/>
+<rect x="460" y="80" width="38" height="38" class="zero-cell"/>
+<text x="75" y="141.0" class="label-side">s₁</text>
+<rect x="80" y="118" width="38" height="38" fill="rgb(40,80,215)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="118" y="118" width="38" height="38" fill="rgb(40,80,215)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="156" y="118" width="38" height="38" class="zero-cell"/>
+<rect x="194" y="118" width="38" height="38" class="zero-cell"/>
+<rect x="232" y="118" width="38" height="38" class="zero-cell"/>
+<rect x="270" y="118" width="38" height="38" class="zero-cell"/>
+<rect x="308" y="118" width="38" height="38" class="zero-cell"/>
+<rect x="346" y="118" width="38" height="38" class="zero-cell"/>
+<rect x="384" y="118" width="38" height="38" class="zero-cell"/>
+<rect x="422" y="118" width="38" height="38" class="zero-cell"/>
+<rect x="460" y="118" width="38" height="38" class="zero-cell"/>
+<text x="75" y="179.0" class="label-side">i₀</text>
+<rect x="80" y="156" width="38" height="38" fill="rgb(106,133,228)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="118" y="156" width="38" height="38" fill="rgb(106,133,228)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="156" y="156" width="38" height="38" fill="rgb(106,133,228)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="194" y="156" width="38" height="38" class="zero-cell"/>
+<rect x="232" y="156" width="38" height="38" class="zero-cell"/>
+<rect x="270" y="156" width="38" height="38" class="zero-cell"/>
+<rect x="308" y="156" width="38" height="38" class="zero-cell"/>
+<rect x="346" y="156" width="38" height="38" class="zero-cell"/>
+<rect x="384" y="156" width="38" height="38" class="zero-cell"/>
+<rect x="422" y="156" width="38" height="38" class="zero-cell"/>
+<rect x="460" y="156" width="38" height="38" class="zero-cell"/>
+<text x="75" y="217.0" class="label-side">i₁</text>
+<rect x="80" y="194" width="38" height="38" fill="rgb(140,160,235)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="118" y="194" width="38" height="38" fill="rgb(140,160,235)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="156" y="194" width="38" height="38" fill="rgb(140,160,235)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="194" y="194" width="38" height="38" fill="rgb(140,160,235)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="232" y="194" width="38" height="38" class="zero-cell"/>
+<rect x="270" y="194" width="38" height="38" class="zero-cell"/>
+<rect x="308" y="194" width="38" height="38" class="zero-cell"/>
+<rect x="346" y="194" width="38" height="38" class="zero-cell"/>
+<rect x="384" y="194" width="38" height="38" class="zero-cell"/>
+<rect x="422" y="194" width="38" height="38" class="zero-cell"/>
+<rect x="460" y="194" width="38" height="38" class="zero-cell"/>
+<text x="75" y="255.0" class="label-side">i₂</text>
+<rect x="80" y="232" width="38" height="38" fill="rgb(160,176,239)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="118" y="232" width="38" height="38" fill="rgb(160,176,239)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="156" y="232" width="38" height="38" fill="rgb(160,176,239)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="194" y="232" width="38" height="38" fill="rgb(160,176,239)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="232" y="232" width="38" height="38" fill="rgb(160,176,239)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="270" y="232" width="38" height="38" class="zero-cell"/>
+<rect x="308" y="232" width="38" height="38" class="zero-cell"/>
+<rect x="346" y="232" width="38" height="38" class="zero-cell"/>
+<rect x="384" y="232" width="38" height="38" class="zero-cell"/>
+<rect x="422" y="232" width="38" height="38" class="zero-cell"/>
+<rect x="460" y="232" width="38" height="38" class="zero-cell"/>
+<text x="75" y="293.0" class="label-side">i₃</text>
+<rect x="80" y="270" width="38" height="38" fill="rgb(173,186,241)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="118" y="270" width="38" height="38" fill="rgb(173,186,241)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="156" y="270" width="38" height="38" fill="rgb(173,186,241)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="194" y="270" width="38" height="38" fill="rgb(173,186,241)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="232" y="270" width="38" height="38" fill="rgb(173,186,241)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="270" y="270" width="38" height="38" fill="rgb(173,186,241)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="308" y="270" width="38" height="38" class="zero-cell"/>
+<rect x="346" y="270" width="38" height="38" class="zero-cell"/>
+<rect x="384" y="270" width="38" height="38" class="zero-cell"/>
+<rect x="422" y="270" width="38" height="38" class="zero-cell"/>
+<rect x="460" y="270" width="38" height="38" class="zero-cell"/>
+<text x="75" y="331.0" class="label-side">i₄</text>
+<rect x="80" y="308" width="38" height="38" fill="rgb(182,194,243)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="118" y="308" width="38" height="38" fill="rgb(182,194,243)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="156" y="308" width="38" height="38" fill="rgb(182,194,243)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="194" y="308" width="38" height="38" fill="rgb(182,194,243)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="232" y="308" width="38" height="38" fill="rgb(182,194,243)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="270" y="308" width="38" height="38" fill="rgb(182,194,243)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="308" y="308" width="38" height="38" fill="rgb(182,194,243)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="346" y="308" width="38" height="38" class="zero-cell"/>
+<rect x="384" y="308" width="38" height="38" class="zero-cell"/>
+<rect x="422" y="308" width="38" height="38" class="zero-cell"/>
+<rect x="460" y="308" width="38" height="38" class="zero-cell"/>
+<text x="75" y="369.0" class="label-side">i₅</text>
+<rect x="80" y="346" width="38" height="38" fill="rgb(190,200,245)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="118" y="346" width="38" height="38" fill="rgb(190,200,245)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="156" y="346" width="38" height="38" fill="rgb(190,200,245)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="194" y="346" width="38" height="38" fill="rgb(190,200,245)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="232" y="346" width="38" height="38" fill="rgb(190,200,245)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="270" y="346" width="38" height="38" fill="rgb(190,200,245)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="308" y="346" width="38" height="38" fill="rgb(190,200,245)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="346" y="346" width="38" height="38" fill="rgb(190,200,245)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="384" y="346" width="38" height="38" class="zero-cell"/>
+<rect x="422" y="346" width="38" height="38" class="zero-cell"/>
+<rect x="460" y="346" width="38" height="38" class="zero-cell"/>
+<text x="75" y="407.0" class="label-side">q₀</text>
+<rect x="80" y="384" width="38" height="38" fill="rgb(195,204,246)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="118" y="384" width="38" height="38" fill="rgb(195,204,246)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="156" y="384" width="38" height="38" fill="rgb(195,204,246)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="194" y="384" width="38" height="38" fill="rgb(195,204,246)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="232" y="384" width="38" height="38" fill="rgb(195,204,246)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="270" y="384" width="38" height="38" fill="rgb(195,204,246)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="308" y="384" width="38" height="38" fill="rgb(195,204,246)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="346" y="384" width="38" height="38" fill="rgb(195,204,246)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="384" y="384" width="38" height="38" fill="rgb(195,204,246)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="422" y="384" width="38" height="38" class="zero-cell"/>
+<rect x="460" y="384" width="38" height="38" class="zero-cell"/>
+<text x="75" y="445.0" class="label-side">q₁</text>
+<rect x="80" y="422" width="38" height="38" fill="rgb(200,208,247)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="118" y="422" width="38" height="38" fill="rgb(200,208,247)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="156" y="422" width="38" height="38" fill="rgb(200,208,247)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="194" y="422" width="38" height="38" fill="rgb(200,208,247)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="232" y="422" width="38" height="38" fill="rgb(200,208,247)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="270" y="422" width="38" height="38" fill="rgb(200,208,247)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="308" y="422" width="38" height="38" fill="rgb(200,208,247)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="346" y="422" width="38" height="38" fill="rgb(200,208,247)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="384" y="422" width="38" height="38" fill="rgb(200,208,247)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="422" y="422" width="38" height="38" fill="rgb(200,208,247)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="460" y="422" width="38" height="38" class="zero-cell"/>
+<text x="75" y="483.0" class="label-side">q₂</text>
+<rect x="80" y="460" width="38" height="38" fill="rgb(203,210,247)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="118" y="460" width="38" height="38" fill="rgb(203,210,247)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="156" y="460" width="38" height="38" fill="rgb(203,210,247)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="194" y="460" width="38" height="38" fill="rgb(203,210,247)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="232" y="460" width="38" height="38" fill="rgb(203,210,247)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="270" y="460" width="38" height="38" fill="rgb(203,210,247)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="308" y="460" width="38" height="38" fill="rgb(203,210,247)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="346" y="460" width="38" height="38" fill="rgb(203,210,247)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="384" y="460" width="38" height="38" fill="rgb(203,210,247)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="422" y="460" width="38" height="38" fill="rgb(203,210,247)" stroke="#bbb" stroke-width="0.5"/>
+<rect x="460" y="460" width="38" height="38" fill="rgb(203,210,247)" stroke="#bbb" stroke-width="0.5"/>
+<line x1="80" y1="80" x2="498" y2="498" class="causal-line"/>
+<text x="346" y="156" font-size="13" fill="#e74c3c" font-weight="bold">A[i,j]=0</text>
+<text x="346" y="172" font-size="11" fill="#e74c3c">j &gt; i 时</text>
+<text x="346" y="186" font-size="11" fill="#e74c3c">因果掩码=0</text>
+<rect x="156" y="80" width="228" height="418" fill="none" stroke="#27ae60" stroke-width="2.5" stroke-dasharray="5,3"/>
+<text x="270.0" y="514" text-anchor="middle" font-size="12" fill="#27ae60" font-weight="bold">图像列 (j = i₀..i₅)</text>
+<rect x="80" y="460" width="418" height="38" fill="none" stroke="#e74c3c" stroke-width="2.5"/>
+<text x="503" y="483.0" font-size="11" fill="#e74c3c" font-weight="bold">最后 token 行</text>
+<text x="794.0" y="75" text-anchor="middle" font-size="14" font-weight="bold" fill="#333">图像 token 得分对比</text>
+<rect x="560" y="325" width="14" height="14" fill="#3498db"/>
+<text x="578" y="337" class="legend">列和 Σ_q A[q,j]（论文方法）</text>
+<rect x="560" y="347" width="14" height="14" fill="#e67e22"/>
+<text x="578" y="359" class="legend">A[last, j]（代码实际方法）</text>
+<rect x="560" y="85.0" width="30" height="180.0" fill="#3498db" rx="2"/>
+<text x="575.0" y="81.0" class="val">1.52</text>
+<rect x="596" y="254.23358097362987" width="30" height="10.766419026370132" fill="#e67e22" rx="2"/>
+<text x="611.0" y="250.23358097362987" class="val">0.09</text>
+<text x="590" y="281" class="label">i_0</text>
+<rect x="638" y="124.47686976335714" width="30" height="140.52313023664286" fill="#3498db" rx="2"/>
+<text x="653.0" y="120.47686976335714" class="val">1.19</text>
+<rect x="674" y="254.23358097362987" width="30" height="10.766419026370132" fill="#e67e22" rx="2"/>
+<text x="689.0" y="250.23358097362987" class="val">0.09</text>
+<text x="668" y="281" class="label">i_1</text>
+<rect x="716" y="154.084522085875" width="30" height="110.915477914125" fill="#3498db" rx="2"/>
+<text x="731.0" y="150.084522085875" class="val">0.94</text>
+<rect x="752" y="254.23358097362987" width="30" height="10.766419026370132" fill="#e67e22" rx="2"/>
+<text x="767.0" y="250.23358097362987" class="val">0.09</text>
+<text x="746" y="281" class="label">i_2</text>
+<rect x="794" y="177.7706439438893" width="30" height="87.22935605611072" fill="#3498db" rx="2"/>
+<text x="809.0" y="173.7706439438893" class="val">0.74</text>
+<rect x="830" y="254.23358097362987" width="30" height="10.766419026370132" fill="#e67e22" rx="2"/>
+<text x="845.0" y="250.23358097362987" class="val">0.09</text>
+<text x="824" y="281" class="label">i_3</text>
+<rect x="872" y="197.50907882556788" width="30" height="67.49092117443213" fill="#3498db" rx="2"/>
+<text x="887.0" y="193.50907882556788" class="val">0.57</text>
+<rect x="908" y="254.23358097362987" width="30" height="10.766419026370132" fill="#e67e22" rx="2"/>
+<text x="923.0" y="250.23358097362987" class="val">0.09</text>
+<text x="902" y="281" class="label">i_4</text>
+<rect x="950" y="214.42773729557808" width="30" height="50.57226270442193" fill="#3498db" rx="2"/>
+<text x="965.0" y="210.42773729557808" class="val">0.43</text>
+<rect x="986" y="254.23358097362987" width="30" height="10.766419026370132" fill="#e67e22" rx="2"/>
+<text x="1001.0" y="250.23358097362987" class="val">0.09</text>
+<text x="980" y="281" class="label">i_5</text>
+<line x1="555" y1="265" x2="1028" y2="265" stroke="#333" stroke-width="1"/>
+<rect x="30" y="470" width="840" height="260" rx="10" fill="#fafafa" stroke="#ddd"/>
+<text x="450" y="495" text-anchor="middle" class="title">为什么列和有严重的位置偏差？</text>
+<text x="60" y="520" font-size="13" font-weight="bold" fill="#27ae60">i₀ (第1个图像token)</text>
+<text x="70" y="540" font-size="12" fill="#555">被 5个后续img + 3个question 看到</text>
+<rect x="480" y="526" width="22" height="22" rx="3" fill="#27ae60" opacity="0.7"/>
+<text x="491" y="541" text-anchor="middle" font-size="9" fill="white">✓</text>
+<rect x="508" y="526" width="22" height="22" rx="3" fill="#27ae60" opacity="0.7"/>
+<text x="519" y="541" text-anchor="middle" font-size="9" fill="white">✓</text>
+<rect x="536" y="526" width="22" height="22" rx="3" fill="#27ae60" opacity="0.7"/>
+<text x="547" y="541" text-anchor="middle" font-size="9" fill="white">✓</text>
+<rect x="564" y="526" width="22" height="22" rx="3" fill="#27ae60" opacity="0.7"/>
+<text x="575" y="541" text-anchor="middle" font-size="9" fill="white">✓</text>
+<rect x="592" y="526" width="22" height="22" rx="3" fill="#27ae60" opacity="0.7"/>
+<text x="603" y="541" text-anchor="middle" font-size="9" fill="white">✓</text>
+<rect x="620" y="526" width="22" height="22" rx="3" fill="#27ae60" opacity="0.7"/>
+<text x="631" y="541" text-anchor="middle" font-size="9" fill="white">✓</text>
+<rect x="648" y="526" width="22" height="22" rx="3" fill="#27ae60" opacity="0.7"/>
+<text x="659" y="541" text-anchor="middle" font-size="9" fill="white">✓</text>
+<rect x="676" y="526" width="22" height="22" rx="3" fill="#27ae60" opacity="0.7"/>
+<text x="687" y="541" text-anchor="middle" font-size="9" fill="white">✓</text>
+<text x="709" y="542" font-size="12" font-weight="bold" fill="#27ae60">有效投票者 = 8</text>
+<text x="60" y="590" font-size="13" font-weight="bold" fill="#2980b9">i₃ (第4个图像token)</text>
+<text x="70" y="610" font-size="12" fill="#555">被 2个后续img + 3个question 看到</text>
+<rect x="480" y="596" width="22" height="22" rx="3" fill="#2980b9" opacity="0.7"/>
+<text x="491" y="611" text-anchor="middle" font-size="9" fill="white">✓</text>
+<rect x="508" y="596" width="22" height="22" rx="3" fill="#2980b9" opacity="0.7"/>
+<text x="519" y="611" text-anchor="middle" font-size="9" fill="white">✓</text>
+<rect x="536" y="596" width="22" height="22" rx="3" fill="#2980b9" opacity="0.7"/>
+<text x="547" y="611" text-anchor="middle" font-size="9" fill="white">✓</text>
+<rect x="564" y="596" width="22" height="22" rx="3" fill="#2980b9" opacity="0.7"/>
+<text x="575" y="611" text-anchor="middle" font-size="9" fill="white">✓</text>
+<rect x="592" y="596" width="22" height="22" rx="3" fill="#2980b9" opacity="0.7"/>
+<text x="603" y="611" text-anchor="middle" font-size="9" fill="white">✓</text>
+<rect x="620" y="596" width="22" height="22" rx="3" fill="#eee" stroke="#ccc"/>
+<text x="631" y="611" text-anchor="middle" font-size="9" fill="#ccc">✗</text>
+<rect x="648" y="596" width="22" height="22" rx="3" fill="#eee" stroke="#ccc"/>
+<text x="659" y="611" text-anchor="middle" font-size="9" fill="#ccc">✗</text>
+<rect x="676" y="596" width="22" height="22" rx="3" fill="#eee" stroke="#ccc"/>
+<text x="687" y="611" text-anchor="middle" font-size="9" fill="#ccc">✗</text>
+<text x="709" y="612" font-size="12" font-weight="bold" fill="#2980b9">有效投票者 = 5</text>
+<text x="60" y="660" font-size="13" font-weight="bold" fill="#8e44ad">i₅ (最后一个图像token)</text>
+<text x="70" y="680" font-size="12" fill="#555">被 0个后续img + 3个question 看到</text>
+<rect x="480" y="666" width="22" height="22" rx="3" fill="#8e44ad" opacity="0.7"/>
+<text x="491" y="681" text-anchor="middle" font-size="9" fill="white">✓</text>
+<rect x="508" y="666" width="22" height="22" rx="3" fill="#8e44ad" opacity="0.7"/>
+<text x="519" y="681" text-anchor="middle" font-size="9" fill="white">✓</text>
+<rect x="536" y="666" width="22" height="22" rx="3" fill="#8e44ad" opacity="0.7"/>
+<text x="547" y="681" text-anchor="middle" font-size="9" fill="white">✓</text>
+<rect x="564" y="666" width="22" height="22" rx="3" fill="#eee" stroke="#ccc"/>
+<text x="575" y="681" text-anchor="middle" font-size="9" fill="#ccc">✗</text>
+<rect x="592" y="666" width="22" height="22" rx="3" fill="#eee" stroke="#ccc"/>
+<text x="603" y="681" text-anchor="middle" font-size="9" fill="#ccc">✗</text>
+<rect x="620" y="666" width="22" height="22" rx="3" fill="#eee" stroke="#ccc"/>
+<text x="631" y="681" text-anchor="middle" font-size="9" fill="#ccc">✗</text>
+<rect x="648" y="666" width="22" height="22" rx="3" fill="#eee" stroke="#ccc"/>
+<text x="659" y="681" text-anchor="middle" font-size="9" fill="#ccc">✗</text>
+<rect x="676" y="666" width="22" height="22" rx="3" fill="#eee" stroke="#ccc"/>
+<text x="687" y="681" text-anchor="middle" font-size="9" fill="#ccc">✗</text>
+<text x="709" y="682" font-size="12" font-weight="bold" fill="#8e44ad">有效投票者 = 3</text>
+<text x="450" y="700" text-anchor="middle" font-size="13" fill="#c0392b" font-weight="bold">结论：列和得分 ∝ 位置（越靠前越高），而非内容重要性 → 论文方法在 causal decoder 中失效</text>
+</svg>
