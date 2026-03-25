@@ -54,16 +54,16 @@ def fastv_diff_image_scores(
     device = attn_avg.device
     dtype = attn_avg.dtype
 
-    # ---- c_i：图像内部重要性（因果校正） ----
-    # m[i, j] = 图像 token i → 图像 token j 的注意力（因果：j <= i 时非零）
-    m = attn_avg[img_start:img_end, img_start:img_end]           # [n_eff, n_eff]
-    # col_sums[j] = 图像 token j 从所有图像 token 收到的注意力总和
-    # 由于因果掩码：token j 被 token j, j+1, ..., n_eff-1 看到 → 共 (n_eff - j) 个
-    col_sums_img = m.sum(dim=0)                                   # [n_eff]
-    # 除以因果可见数，消除"前面的 token 天然列和大"的位置偏差
-    viewers = torch.arange(n_eff, 0, -1, device=device, dtype=dtype)  # [n_eff, n_eff-1, ..., 1]
-    col_means_img = col_sums_img / viewers                        # [n_eff]
-    c = _ate_diff_1d(col_means_img)                               # [n_eff]
+    # ---- c_i：图像内部重要性（对称化） ----
+    # 由于 decoder 是因果的，图像内部子矩阵 m 天然是非对称的（下三角为主）。
+    # 按你的要求：只对图像内部先做对称化 m_sym = (m + m^T) / 2，
+    # 再统计列和得到重要性分布。
+    m = attn_avg[img_start:img_end, img_start:img_end]                 # [n_eff, n_eff]
+    m_sym = (m + m.transpose(0, 1)) / 2.0                            # [n_eff, n_eff]
+    col_sums_img = m_sym.sum(dim=0)                                   # [n_eff]
+    # _ate_diff_1d 对线性缩放不敏感（只做线性变换+居中），这里保持数值尺度稳定
+    col_means_img = col_sums_img / float(n_eff)                        # [n_eff]
+    c = _ate_diff_1d(col_means_img)                                   # [n_eff]
 
     # ---- r_i：问题/文本 → 图像重要性（天然无偏） ----
     # 只取图像块之后的 token（问题、文本）：它们能看到所有图像 token，无因果偏差
